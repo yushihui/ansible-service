@@ -16,4 +16,10 @@ public class AnsibleResource {
         return "hello " + taskName;
     }
 
+    @GetMapping("/start-task/{taskName}")
+    public String startTask(@PathVariable("taskName") final String taskName) {
+
+        return "hello " + taskName;
+    }
+
 }
