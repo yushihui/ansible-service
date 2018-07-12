@@ -6,14 +6,21 @@ option java_outer_classname = "AnsibleProto";
 
 package com.netbrain.rpc.ansible;
 
+import public "google/protobuf/timestamp.proto";
+
 service AnsibleExecutor {
-    rpc StartAutoMationJob (AnsibleJob) returns (stream AnsibleJobResponse) {}
+    rpc StartAnsibleJob (AnsibleJob) returns (stream AnsibleJobResponse) {
+    }
 }
 
 
 message AnsibleJob {
     string id = 1;
     string name = 2;
+    string playbook = 3;
+    bytes playbookCotent = 4;
+    bytes inventoryContent = 5;
+    JobPriority jobPriority = 6;
 }
 
 enum JobStatus {
@@ -34,6 +41,8 @@ enum JobPriority {
 message AnsibleJobResponse {
     string message = 1;
     JobStatus status = 2;
-    JobPriority jobPriority = 3;
+    google.protobuf.Timestamp startTime = 3;
+    google.protobuf.Timestamp endTime = 4;
+    bytes exeLog = 5;
 
 }

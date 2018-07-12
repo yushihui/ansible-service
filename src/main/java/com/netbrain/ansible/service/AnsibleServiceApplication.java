@@ -1,4 +1,4 @@
-package com.netbrain.service.ansible;
+package com.netbrain.ansible.service;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

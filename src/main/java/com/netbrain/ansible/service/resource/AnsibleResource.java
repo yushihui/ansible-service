@@ -1,5 +1,4 @@
-package com.netbrain.service.ansible.resource;
-
+package com.netbrain.ansible.service.resource;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
