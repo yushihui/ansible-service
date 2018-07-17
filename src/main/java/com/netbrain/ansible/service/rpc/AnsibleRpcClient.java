@@ -1,8 +1,8 @@
 package com.netbrain.ansible.service.rpc;
 
-import com.netbrain.rpc.ansible.AnsibleExecutorGrpc;
 import com.netbrain.rpc.ansible.AnsibleJob;
 import com.netbrain.rpc.ansible.AnsibleJobResponse;
+import com.netbrain.rpc.ansible.AnsibleServiceGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.StatusRuntimeException;
@@ -18,7 +18,7 @@ public class AnsibleRpcClient {
     private static final Logger logger = Logger.getLogger(AnsibleRpcClient.class.getName());
 
     private final ManagedChannel channel;
-    private final AnsibleExecutorGrpc.AnsibleExecutorBlockingStub blockingStub;
+    private final AnsibleServiceGrpc.AnsibleServiceBlockingStub blockingStub;
 
     public AnsibleRpcClient(String host, int port) {
         this(ManagedChannelBuilder.forAddress(host, port)
@@ -31,7 +31,7 @@ public class AnsibleRpcClient {
     }
     AnsibleRpcClient(ManagedChannel channel) {
         this.channel = channel;
-        blockingStub = AnsibleExecutorGrpc.newBlockingStub(channel);
+        blockingStub = AnsibleServiceGrpc.newBlockingStub(channel);
     }
 
     public void shutdown() throws InterruptedException {
@@ -56,7 +56,7 @@ public class AnsibleRpcClient {
     }
 
     public static void main(String[] args) throws Exception {
-        AnsibleRpcClient client = new AnsibleRpcClient("192.168.4.63", 50051);
+        AnsibleRpcClient client = new AnsibleRpcClient("192.168.1.177", 50051);
         try {
             AnsibleJob job = AnsibleJob.newBuilder().setName("Ansible").setId(UUID.randomUUID().toString()).build();
             client.startJob(job);

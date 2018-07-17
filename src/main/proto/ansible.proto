@@ -3,14 +3,16 @@ syntax = "proto3";
 option java_multiple_files = true;
 option java_package = "com.netbrain.rpc.ansible";
 option java_outer_classname = "AnsibleProto";
+option go_package = "github.com/yushihui/ansible-pb";
 
 package com.netbrain.rpc.ansible;
+import "google/protobuf/timestamp.proto";
 
-import public "google/protobuf/timestamp.proto";
+// go compile: protoc --proto_path=src  --go_out=plugins=grpc:bin src/proto/ansible.proto
+// C# compile
 
-service AnsibleExecutor {
-    rpc StartAnsibleJob (AnsibleJob) returns (stream AnsibleJobResponse) {
-    }
+service AnsibleService {
+    rpc StartAnsibleJob (AnsibleJob) returns (stream AnsibleJobResponse){}
 }
 
 
